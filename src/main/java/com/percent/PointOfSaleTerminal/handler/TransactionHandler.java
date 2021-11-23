@@ -110,7 +110,7 @@ public class TransactionHandler {
 
             if (item.getWholesaleOrder() != null && wholesaleTracker.getCount() >= item.getWholesaleOrder().getWholesaleThreshold()){
                 //ToDo: figure this out its too late and my brain is not working
-                totalAfterSavings = item.getWholesaleOrder().getWholesaleThreshold()
+                totalAfterSavings = item.getWholesaleOrder().getWholesaleThreshold();
             } else {
                 totalAfterSavings = totalBeforeSavings;
             }
