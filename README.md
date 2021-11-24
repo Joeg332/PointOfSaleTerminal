@@ -5,10 +5,52 @@ The Point of sale terminal is a microservice application which will allow the us
 
 
 
-## Running Locally
-## API Endpoints
+
+## Run Locally
+
+Clone the project
+
+```bash
+  git clone https://github.com/Joeg332/PointOfSaleTerminal.git
+```
+
+Go to the project directory
+
+```bash
+  cd pointOfSaleTerminal
+```
+
+Build Project
+
+```bash
+  ./gradlew build
+```
+
+Start the server
+
+```bash
+  ./gradlew bootRun
+```
+## API Reference
+
+#### Swagger API Documentation
+
+```http
+  GET /pointOfSaleTerminal/api/swagger-ui.html
+```
+
+#### Actuator HealthCheck
+
+```http
+  GET /pointOfSaleTerminal/api/actuator/health
+```
+
+Note: At this time you need to refer to Specific Endpoints using the included swagger doc
 
 
+## Dependencies
+- jdk-17.0.1
+    - Availible to download At https://jdk.java.net/17/
 
 ## Data Model Diagrams
 You can view the Data model at the following address: https://lucid.app/lucidchart/39af56f9-d216-4c38-ba67-1a91631c48b3/edit?viewport_loc=117%2C256%2C2219%2C1055%2C0_0&invitationId=inv_10d4e142-3015-4f5a-a0d1-e95ea57ca4a0
@@ -32,5 +74,5 @@ You can view the Data model at the following address: https://lucid.app/lucidcha
 ## Tech Stack
 - Spring Boot
 - lombok
-- spriong actuator
+- spring actuator
 - Swagger
