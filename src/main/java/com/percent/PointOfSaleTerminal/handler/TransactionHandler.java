@@ -106,15 +106,18 @@ public class TransactionHandler {
             WholesaleTracker wholesaleTracker = (WholesaleTracker) entry.getValue();
 
             Item item = itemHandler.getItem(wholesaleTracker.getItemCode());
-            totalBeforeSavings = item.getItemPrice() * wholesaleTracker.getCount();
+            totalBeforeSavings += item.getItemPrice() * wholesaleTracker.getCount();
 
             if (item.getWholesaleOrder() != null && wholesaleTracker.getCount() >= item.getWholesaleOrder().getWholesaleThreshold()){
                 //ToDo: figure this out its too late and my brain is not working
-                totalAfterSavings = item.getWholesaleOrder().getWholesaleThreshold();
+                int threshold = item.getWholesaleOrder().getWholesaleThreshold();
+                int bundles = wholesaleTracker.getCount() / threshold;
+                int remainder = wholesaleTracker.getCount() % threshold;
+                totalAfterSavings += (bundles * item.getWholesaleOrder().getWholesalePrice()) + (remainder * item.getItemPrice());
             } else {
-                totalAfterSavings = totalBeforeSavings;
+                totalAfterSavings += totalBeforeSavings;
             }
-            totalSavings = totalBeforeSavings - totalAfterSavings;
+            totalSavings += totalBeforeSavings - totalAfterSavings;
 
 
         }
