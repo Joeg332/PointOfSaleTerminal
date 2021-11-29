@@ -83,7 +83,7 @@ public class ItemDAL {
         Item itemD = Item.builder()
                 .itemCode("D")
                 .name("Avacado")
-                .itemPrice(1.00)
+                .itemPrice(0.75)
                 .build();
         items.put(itemD.getItemCode(), itemD);
 
