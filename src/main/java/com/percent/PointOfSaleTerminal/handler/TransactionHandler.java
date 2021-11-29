@@ -27,8 +27,12 @@ public class TransactionHandler {
         return transactionDAL.getTransaction(transactionId);
     }
 
-    //ToDo: Valid error handling
-    //toDo: Javadoc
+    //ToDo: Protect against NPE's
+    /**
+     * Creates a new transaction using the item code as the first item scanned
+     * @param itemCode the item which was scanned
+     * @return The newly created transaction with the scanned item
+     * **/
     //Note: If I were using a different persistence model such as spring data I wouldn't need to split this up into multiple save actions however since
     // I'm generating the UUID in the dal I need to get the ID back before I can persist child elements
     public Transaction createTransactionAndScan(String itemCode){
@@ -58,8 +62,12 @@ public class TransactionHandler {
         return transaction;
     }
 
-    //ToDo: Valid error handling
-    //toDo: Javadoc
+    //ToDo: Protect against NPE's
+    /**
+     * @param transactionId The key for the transaction
+     * @param itemCode the item which was scanned
+     * @return The Whole transaction without the total calculated
+     * **/
     public Transaction scanAndUpdateTransaction(UUID transactionId, String itemCode){
         //1) Get item from ItemHandler
         itemHandler.getItem(itemCode);
@@ -92,8 +100,12 @@ public class TransactionHandler {
         return transaction;
     }
 
+    //ToDo: Protect against NPE's
+    /**
+     * @param transactionId The key for the transaction
+     * @return The Whole transaction which will include the total cost and savings based upon wholesale prices
+     * **/
     public Transaction calculateTotal(UUID transactionId){
-        //ToDo: Valid error handling
         //toDo: Javadoc
         //1) verify valid TransactionId
         Transaction transaction = transactionDAL.getTransaction(transactionId);
@@ -128,8 +140,12 @@ public class TransactionHandler {
         return transaction;
     }
 
-    //ToDo: Valid error handling
-    //toDo: Javadoc
+    //ToDo: Protect against NPE's
+    /**
+     * @param transactionId The key for the transaction
+     * @param transactionItemId The key for the item ion the transaction
+     * @return The Whole transaction which will no longer include the missing item
+     * **/
     public Transaction removeItemFromTransaction(UUID transactionId, UUID transactionItemId){
         //1) Get TransactionItem so that we can obtain the itemCode
         TransactionItem transactionItem = transactionDAL.getTransaction(transactionId).getTransactionItems().get(transactionItemId);

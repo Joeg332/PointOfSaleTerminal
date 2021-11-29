@@ -41,7 +41,7 @@ public class TransactionController {
     }
 
     @GetMapping("/transaction/{transactionId}/calculateTotal")
-    public Transaction removeItemFromTransaction(@PathVariable UUID transactionId){
+    public Transaction calculateTotal(@PathVariable UUID transactionId){
         return transactionHandler.calculateTotal(transactionId);
     }
 }
