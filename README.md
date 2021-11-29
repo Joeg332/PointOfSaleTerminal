@@ -69,6 +69,9 @@ You can view the Data model at the following address: https://lucid.app/lucidcha
 - I would've liked to understand the use case foir this data. it may make more sense to go for a NoSQL approach such as MongoDB or DynamoDB depending upon the requirements
 - Depending on the scope of the "project" we may want to break this out into multiple services
 - I would have liked to create a docker image to run this on but due to time constrains that was not possible
+- I would have liked to add more unit tests but due to time constraints I only included what was required
+- I need to improve NPE saftey 
+- I need to add negative unit tests
 
 
 ## Tech Stack
