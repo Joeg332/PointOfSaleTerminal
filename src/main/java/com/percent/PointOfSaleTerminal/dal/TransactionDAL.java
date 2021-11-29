@@ -28,7 +28,7 @@ public class TransactionDAL {
         return transactions.get(transactionId);
     }
 
-    public Transaction DeleteTransaction(UUID transactionId){
+    public Transaction deleteTransaction(UUID transactionId){
         return transactions.remove(transactionId);
     }
 
@@ -52,38 +52,20 @@ public class TransactionDAL {
         transactionItem.setTransactionItemId(newId);
         transactions.get(transactionId).getTransactionItems().put(newId, transactionItem);
 
-//        //2) update the wholesaleTracker
-//        //ToDo: handle case where wholesaleTracker is initialized
-//        //ToDo: Determine if we want to move this logic into the handler
-//        WholesaleTracker wholesaleTracker = transactions.get(transactionId).getWholesaleTrackers().get(transactionItem.getItemCode());
-//        wholesaleTracker.setCount(wholesaleTracker.getCount()+1);
-//        transactions.get(transactionId).getWholesaleTrackers().put(wholesaleTracker.getItemCode(), wholesaleTracker);
-
-        //3) return
+        //2) return
         return transactions.get(transactionId);
     }
 
     public Transaction saveWholesaleTrackerOnTransaction(UUID transactionId, WholesaleTracker wholesaleTracker){
         transactions.get(transactionId).getWholesaleTrackers().put(wholesaleTracker.getItemCode(), wholesaleTracker);
         return transactions.get(transactionId);
-
     }
 
     public Transaction removeItemFromTransaction(UUID transactionId, UUID transactionItemId){
-//        //1) Get Existing TransactionItem
-//        TransactionItem transactionItem = transactions.get(transactionId).getTransactionItems().get(transactionItemId);
-
-        //2) Remove the existing transactionItem from the list
+        //1) Remove the existing transactionItem from the list
         transactions.get(transactionId).getTransactionItems().remove(transactionItemId);
 
-//        //3) update the wholesaleTracker
-//        //ToDo: handle case where wholesaleTracker is initialized
-//        //ToDo: Determine if we want to move this logic into the handler
-//        WholesaleTracker wholesaleTracker = transactions.get(transactionId).getWholesaleTrackers().get(transactionItem.getItemCode());
-//        wholesaleTracker.setCount(wholesaleTracker.getCount()-1);
-//        transactions.get(transactionId).getWholesaleTrackers().put(wholesaleTracker.getItemCode(), wholesaleTracker);
-
-        //4) return
+        //2) return
         return transactions.get(transactionId);
     }
 
