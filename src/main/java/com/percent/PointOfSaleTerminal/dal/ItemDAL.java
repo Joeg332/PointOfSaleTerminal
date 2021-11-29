@@ -76,7 +76,7 @@ public class ItemDAL {
                 .itemCode("C")
                 .name("Shampoo")
                 .itemPrice(1.00)
-                .wholesaleOrder(wholesaleA)
+                .wholesaleOrder(wholesaleC)
                 .build();
         items.put(itemC.getItemCode(), itemC);
 
@@ -84,7 +84,6 @@ public class ItemDAL {
                 .itemCode("D")
                 .name("Avacado")
                 .itemPrice(1.00)
-                .wholesaleOrder(wholesaleA)
                 .build();
         items.put(itemD.getItemCode(), itemD);
 

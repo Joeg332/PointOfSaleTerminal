@@ -106,7 +106,6 @@ public class TransactionHandler {
      * @return The Whole transaction which will include the total cost and savings based upon wholesale prices
      * **/
     public Transaction calculateTotal(UUID transactionId){
-        //toDo: Javadoc
         //1) verify valid TransactionId
         Transaction transaction = transactionDAL.getTransaction(transactionId);
 
@@ -114,12 +113,16 @@ public class TransactionHandler {
         double totalAfterSavings = 0;
         double totalSavings = 0;
 
+        //2) loop through wholesale tracker to find deals
         for (Map.Entry entry : transaction.getWholesaleTrackers().entrySet()){
             WholesaleTracker wholesaleTracker = (WholesaleTracker) entry.getValue();
 
+            //2.1) Calculate cost without savings
             Item item = itemHandler.getItem(wholesaleTracker.getItemCode());
-            totalBeforeSavings += item.getItemPrice() * wholesaleTracker.getCount();
+            double itemTotal = item.getItemPrice() * wholesaleTracker.getCount();
+            totalBeforeSavings += itemTotal;
 
+            //2.2) Calculate cost with savings
             if (item.getWholesaleOrder() != null && wholesaleTracker.getCount() >= item.getWholesaleOrder().getWholesaleThreshold()){
                 //ToDo: figure this out its too late and my brain is not working
                 int threshold = item.getWholesaleOrder().getWholesaleThreshold();
@@ -127,16 +130,20 @@ public class TransactionHandler {
                 int remainder = wholesaleTracker.getCount() % threshold;
                 totalAfterSavings += (bundles * item.getWholesaleOrder().getWholesalePrice()) + (remainder * item.getItemPrice());
             } else {
-                totalAfterSavings += totalBeforeSavings;
+                totalAfterSavings += itemTotal;
             }
-            totalSavings += totalBeforeSavings - totalAfterSavings;
-
 
         }
 
+        //3) Calculate total savings
+        totalSavings += totalBeforeSavings - totalAfterSavings;
+
+        //4) Set values
         transaction.setTotalBeforeSavings(totalBeforeSavings);
         transaction.setTotalAfterSavings(totalAfterSavings);
         transaction.setTotalSavings(totalSavings);
+
+        //5) Return transaction with calculated cost
         return transaction;
     }
 
